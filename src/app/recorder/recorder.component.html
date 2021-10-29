@@ -2,5 +2,5 @@
     <h1>Voice recognition</h1>
     <button style="margin: 10px;" class="btn btn-warning" (click)="recording = !recording" (click)="buttonPress()">{{recording ? 'Stop' : 'Start'}}</button>
     <button style="margin: 10px;" class="btn btn-warning" (click)="recording = !recording" (click)="submitData()">Submit</button>
-    <p>{{service.text}}</p>
+    <p id=text>{{voiceService.text}}</p>
 </div>
