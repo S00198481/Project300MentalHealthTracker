@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VoiceRecognitionService } from '../service/voice-recognition.service';
 
 @Component({
   selector: 'app-recorder',
@@ -7,13 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecorderComponent implements OnInit {
 
-  constructor() { }
+  recording:boolean = false;
+
+  constructor(
+    public service : VoiceRecognitionService
+  ) { 
+    this.service.init()
+   }
 
   ngOnInit(): void {
   }
 
-  record() {
-    
+  buttonPress() {
+    if(this.recording==true) {
+      this.startService()
+    }
+    if(this.recording==false) {
+      this.stopService()
+    }
+  }
+
+  startService() {
+    this.service.start()
+  }
+
+  stopService() {
+    this.service.stop()
+  }
+
+  submitData() {
+
   }
 
 }

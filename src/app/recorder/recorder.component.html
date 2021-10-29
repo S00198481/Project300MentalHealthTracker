@@ -1,2 +1,6 @@
-<button class="btn btn-warning divButton" 
-(click)="record()">Please Record</button>
+<div style="margin: 100px;">
+    <h1>Voice recognition</h1>
+    <button style="margin: 10px;" class="btn btn-warning" (click)="recording = !recording" (click)="buttonPress()">{{recording ? 'Stop' : 'Start'}}</button>
+    <button style="margin: 10px;" class="btn btn-warning" (click)="recording = !recording" (click)="submitData()">Submit</button>
+    <p>{{service.text}}</p>
+</div>
