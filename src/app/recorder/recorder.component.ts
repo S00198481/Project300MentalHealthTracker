@@ -11,6 +11,7 @@ export class RecorderComponent implements OnInit {
 
   recording: boolean = false;
   userText: string;
+  emotion: any;
   sentiment: any;
   errorMessage: any;
 
@@ -42,14 +43,22 @@ export class RecorderComponent implements OnInit {
 
   submitData() {
     this.userText = document.getElementById("text").textContent
-    console.log(this.userText)
     this.userText = this.userText.split(" ").join("%20");
+    this.sentimentService.getEmotion(this.userText).subscribe(
+      emotion => {
+        this.emotion = emotion;
+      },
+      error => this.errorMessage = <any>error
+    );
+
     this.sentimentService.getSentiment(this.userText).subscribe(
       sentiment => {
         this.sentiment = sentiment;
       },
       error => this.errorMessage = <any>error
     );
-    console.log(this.userText)
+
+    console.log(this.sentiment);
+    console.log(this.emotion);
   }
 }
