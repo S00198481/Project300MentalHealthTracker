@@ -13,7 +13,7 @@ import { Credentials } from 'node_modules/aws-sdk';
 export class AWSService {
 
   client = new DynamoDB({region: "eu-west-1"});
-  cred = new Credentials("AKIAWDJHI5VVRKEITGNG", "6sm+skj7bhPe3eTcdirE2YSgI0Gol8f4615EZ5QS");
+  cred = new Credentials("", "");
   data:any;
 
   params:any;
