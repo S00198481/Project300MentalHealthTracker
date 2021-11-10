@@ -12,6 +12,7 @@
 </html>
 <body>
   <app-login *ngIf="!this.doShow" (isShown)="getShow($event)"></app-login>
+  <app-recorder *ngIf="!this.loginShow"></app-recorder>
 </body>
 
 <nav class="navbar fixed-bottom nav justify-content-center" >

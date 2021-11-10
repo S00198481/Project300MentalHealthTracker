@@ -12,6 +12,7 @@ export class AppComponent {
   constructor(private Login: LoginComponent){}
 
   doShow:boolean;
+  loginShow:boolean = true;
 
   ngOnInit(doShow)
   {
@@ -23,6 +24,6 @@ export class AppComponent {
 
   getShow(isShown:boolean) {
     this.doShow = !isShown;
-    console.log(this.doShow);
+    this.loginShow = false;
   }
 }
