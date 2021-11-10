@@ -3,8 +3,8 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { DynamoDB } from 'node_modules/aws-sdk';
-
 import { Credentials } from 'node_modules/aws-sdk';
+import { v4 as uuidv4 } from 'uuid'
 
 
 @Injectable({
@@ -13,8 +13,9 @@ import { Credentials } from 'node_modules/aws-sdk';
 export class AWSService {
 
   client = new DynamoDB({region: "eu-west-1"});
-  cred = new Credentials("AKIAWDJHI5VVRKEITGNG", "6sm+skj7bhPe3eTcdirE2YSgI0Gol8f4615EZ5QS");
+  cred = new Credentials("", "");
   data:any;
+  key:any;
 
   params:any;
 
@@ -22,11 +23,16 @@ export class AWSService {
 
   async sendData(text:string, emotion:string, sentiment:string) {
     this.client.config.region = "eu-west-1"
-    this.client.config.credentials = this.cred;
+    this.client.config.credentials = this.cred
     this.client.config.update({region: "eu-west-1"})
+    this.key = uuidv4()
+    console.log(this.key)
     this.params = {
       TableName: "AppRecordings",
       Item: {
+        "UUID": {
+          S: this.key
+        },
         "UserID": {
           S: "username"
         },
