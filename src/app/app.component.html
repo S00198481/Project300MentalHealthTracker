@@ -10,13 +10,11 @@
 </head>
 </html>
 <body>
-  <app-root></app-root>
-  <app-login *ngIf="this.doShow"></app-login> 
+  <app-login *ngIf="!this.doShow" (isShown)="getShow($event)"></app-login>
 </body>
-</footer>
+
 <nav class="navbar fixed-bottom nav justify-content-center" >
   <a class="bi bi-house-door navbar-brand justify-content-center" href="#" style="font-size: 40px;"></a>
   <a class="bi bi-mic navbar-brand" href="@" style="font-size: 40px;"></a>
 </nav>
-</footer>
-</html>
+

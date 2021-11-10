@@ -20,4 +20,9 @@ export class AppComponent {
       doShow => this.Login.isShown
     );
   }
+
+  getShow(isShown:boolean) {
+    this.doShow = !isShown;
+    console.log(this.doShow);
+  }
 }

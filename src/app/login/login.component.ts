@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   inputPassword:string;
 
   ngOnInit(): void {
-    this.isShown.emit(true);
+
   }
 
   componentOnSubmit()
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 
     if (this.signInService.onSubmit(this.inputName, this.inputPassword) == true)
     {
+      console.log("successful")
         this.isShown.emit(false);
     }
     else {
