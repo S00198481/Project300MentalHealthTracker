@@ -1,0 +1,33 @@
+.form-box{
+    width: 90%;
+    margin: 12% auto;
+    padding: 50px 0;
+    color: grey;
+    box-shadow: 0 0 20px 2px;
+}
+.login {
+    text-align: center;
+    color: black;
+}
+.btn- {
+    background-color: #009090;
+    color:white;
+    bottom: 10px;
+    position: relative;
+    transform: translate(230%);
+}
+.input-box{
+    margin: 31px;
+    width: 80%;
+    border: 1px solid #009090;
+    padding-top: 10px;
+    padding-bottom: 5px;
+
+}
+.input-box input{
+    width: 90%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
