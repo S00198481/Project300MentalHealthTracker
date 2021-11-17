@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { stringify } from 'querystring';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../service/login.service';
 
 @Component({
   selector: 'app-login',

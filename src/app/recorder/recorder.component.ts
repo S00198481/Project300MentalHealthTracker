@@ -76,7 +76,7 @@ export class RecorderComponent implements OnInit {
     this.sentiment = JSON.stringify(this.sentiment)
   }
 
-  testQuery() {
-    this.AWSService.getRecordings();
+  test() {
+    this.AWSService.getUsers();
   }
 }
