@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { RecorderComponent } from './recorder/recorder.component';
 
 import { LoginComponent } from './login/login.component';
-import { LoginService } from './services/login.service';
+import { LoginService } from './service/login.service';
 
 
 @NgModule({
