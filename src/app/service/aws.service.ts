@@ -18,7 +18,7 @@ export class AWSService {
   key: any;
   params: any;
   public users: any;
-  public usersArray!: any;
+  user:string;
 
 
   constructor() { }
@@ -29,14 +29,18 @@ export class AWSService {
     this.client.config.update({ region: "eu-west-1" })
     this.key = uuidv4()
     console.log(this.key)
+    console.log(this.user)
     this.params = {
       TableName: "AppRecordings",
       Item: {
         "UserID": {
-          S: "username"
+          S: localStorage.getItem('username')
         },
         "UUID": {
           S: this.key
+        },
+        "Date": {
+          S: new Date().toString()
         },
         "Text": {
           S: text
@@ -101,6 +105,8 @@ export class AWSService {
         for (let i = 0; i < data.Count; i++) {
           if (data.Items[i].username.S == username && data.Items[i].password.S == password) {
             console.log("correct aws details")
+            localStorage.setItem('username', data.Items[i].username.S);
+            console.log(this.user);
             return true;
           }
           else {
