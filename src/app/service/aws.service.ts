@@ -13,10 +13,13 @@ import { v4 as uuidv4 } from 'node_modules/uuid';
 export class AWSService {
 
   client = new DynamoDB({ region: "eu-west-1" });
-  cred = new Credentials("AKIAWDJHI5VVRKEITGNG", "6sm+skj7bhPe3eTcdirE2YSgI0Gol8f4615EZ5QS");
+  cred = new Credentials("", "");
   data: any;
   key: any;
   params: any;
+  public users: any;
+  public usersArray!: any;
+
 
   constructor() { }
 
@@ -58,44 +61,57 @@ export class AWSService {
     this.client.config.credentials = this.cred
     this.client.config.update({ region: "eu-west-1" })
     var params = {
-      TableName : "AppRecordings",
-      KeyConditionExpression : "UserID = :id",
+      TableName: "AppRecordings",
+      KeyConditionExpression: "UserID = :id",
       ExpressionAttributeValues: {
         ":id": {
           S: "username"
-         }
-       }
+        }
+      }
     }
-    this.client.query(params, function(err, data) {
+    this.client.query(params, function (err, data) {
       if (err) {
         console.error("Unable to read item. Error JSON:", JSON.stringify(err,
-                null, 2));
-    } else {
+          null, 2));
+      } else {
         console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-    }
+      }
     });
   }
 
-  getUsers() {
+  getUsers(username: string, password: string):boolean {
     this.client.config.region = "eu-west-1"
     this.client.config.credentials = this.cred
     this.client.config.update({ region: "eu-west-1" })
     var params = {
-      TableName : "AppUsers",
-      KeyConditionExpression : "PK = :pk",
+      TableName: "AppUsers",
+      KeyConditionExpression: "PK = :pk",
       ExpressionAttributeValues: {
         ":pk": {
           S: "username"
-         }
-       }
+        }
+      }
     }
-    this.client.query(params, function(err, data) {
+    this.users = this.client.query(params, function (err, data) {
       if (err) {
         console.error("Unable to read item. Error JSON:", JSON.stringify(err,
-                null, 2));
-    } else {
-        console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-    }
+          null, 2));
+      } else {
+        console.log(data);
+        for (let i = 0; i < data.Count; i++) {
+          if (data.Items[i].username.S == username && data.Items[i].password.S == password) {
+            console.log("correct aws details")
+            return true;
+          }
+          else {
+            console.log(username + " " + password)
+            console.log(data.Items[i].username.S + " " + data.Items[i].password.S)
+            console.log("incorrect aws details")
+            return false;
+          }
+        }
+      }
     });
+    return false;
   }
 }
