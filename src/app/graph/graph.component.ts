@@ -25,17 +25,16 @@ export class GraphComponent implements OnInit {
     setTimeout(() => {
       this.currentUser = localStorage.getItem('username');
       this.userLogs = JSON.parse(localStorage.getItem('logs'))
-      console.log(this.currentUser)
-      console.log(this.userLogs)
+      this.userLogs.Items = this.userLogs.Items.sort((a, b) => (a.Date.S > b.Date.S ? 1 : -1));
       for (let i = 0; i < this.userLogs.Count; i++) {
         let sentiment = JSON.parse(this.userLogs.Items[i].Sentiment.S);
         this.dataScores.push(sentiment.score)
         let date = this.userLogs.Items[i].Date.S;
         this.dates.push(date)
       }
-      console.log(this.dataScores)
-      console.log(this.dates)
     },600)
+    console.log(this.dataScores)
+    console.log(this.dates)
  
     setTimeout(() => {
     this.ctx = (<HTMLElement>document.getElementById('moodChart'));
@@ -48,5 +47,16 @@ export class GraphComponent implements OnInit {
     })
     }, 800);
   }
+
+  compare( a, b ) {
+    if ( a.Date < b.Date ){
+      return -1;
+    }
+    if ( a.Date > b.Date ){
+      return 1;
+    }
+    return 0;
+  }
+  
 
 }
