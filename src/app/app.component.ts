@@ -13,17 +13,31 @@ export class AppComponent {
 
   doShow:boolean;
   loginShow:boolean = true;
+  recorderShow:boolean =false;
+  chartShow:boolean=true;
 
   ngOnInit(doShow)
   {
     doShow = this.Login.isShown
-    .subscribe(
-      doShow => this.Login.isShown
-    );
   }
 
   getShow(isShown:boolean) {
     this.doShow = !isShown;
     this.loginShow = false;
+  }
+
+  homeClick() {
+    if(!this.loginShow) {
+      this.doShow = true;
+      this.chartShow = true;
+      this.recorderShow = false;
+    }
+  }
+
+  recordClick() {
+    if(!this.loginShow) {
+      this.chartShow = false;
+      this.recorderShow = true;
+    }
   }
 }
