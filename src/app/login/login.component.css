@@ -4,6 +4,7 @@
     padding: 50px 0;
     color: grey;
     box-shadow: 0 0 20px 2px;
+    margin-top: 75px;
 }
 .login {
     text-align: center;
@@ -22,7 +23,6 @@
     border: 1px solid #009090;
     padding-top: 10px;
     padding-bottom: 5px;
-
 }
 .input-box input{
     width: 90%;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Chart, ChartDataSets,ChartLineOptions,GridLineOptions} from 'chart.js';
+import { Color,Label,ChartsModule} from 'ng2-charts';
+import { utils } from 'protractor';
 import { AWSService } from '../service/aws.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { AWSService } from '../service/aws.service';
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit {
+
   errorMessage: any;
 
   constructor(private awsService:AWSService) { }
@@ -41,12 +43,29 @@ export class GraphComponent implements OnInit {
     this.ctx = (<HTMLElement>document.getElementById('moodChart'));
     this.chart = new Chart(this.ctx, {
       type: 'line',
+      options:{
+        animation:{
+          duration: 2000,
+          easing: 'easeOutExpo'
+        },
+        responsive: true
+      },
+      plugins:[{
+        
+      }],
       data: {
         labels: this.dates,
-        datasets: [{ data: this.dataScores, label:"stop taking your meds"}]
+        datasets: [{ data: this.dataScores, label:"Daily Progression",
+        borderColor:'#009090',
+        pointStyle:'rectRot',
+        pointRadius:7,
+        fill:'false'
+        
+      }]
       }
     })
     }, 800);
+    
   }
-
+ 
 }
