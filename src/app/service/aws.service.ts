@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { DynamoDB } from 'node_modules/aws-sdk';
+import { CognitoIdentity } from 'node_modules/aws-sdk';
 import { Credentials } from 'node_modules/aws-sdk';
 import { v4 as uuidv4 } from 'node_modules/uuid';
 import moment from 'moment';
@@ -14,6 +15,7 @@ import moment from 'moment';
 export class AWSService {
 
   client = new DynamoDB({ region: "eu-west-1" });
+  cognito = new CognitoIdentity
   cred = new Credentials("AKIAWDJHI5VVRKEITGNG", "6sm+skj7bhPe3eTcdirE2YSgI0Gol8f4615EZ5QS");
   data: any;
   key: any;
@@ -23,7 +25,9 @@ export class AWSService {
   public userLogs:any;
 
 
-  constructor() { }
+  constructor() { 
+    this.cognito.getCredentialsForIdentity
+  }
 
   async sendData(text: string, emotion: string, sentiment: string) {
     this.client.config.region = "eu-west-1"

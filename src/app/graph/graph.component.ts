@@ -35,8 +35,9 @@ export class GraphComponent implements OnInit {
       }
       console.log(this.dataScores)
       console.log(this.dates)
-    },1000)
+    },600)
  
+    setTimeout(() => {
     this.ctx = (<HTMLElement>document.getElementById('moodChart'));
     this.chart = new Chart(this.ctx, {
       type: 'line',
@@ -45,6 +46,7 @@ export class GraphComponent implements OnInit {
         datasets: [{ data: this.dataScores, label:"stop taking your meds"}]
       }
     })
+    }, 800);
   }
 
 }
