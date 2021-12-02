@@ -25,6 +25,7 @@ export class GraphComponent implements OnInit {
   ngOnInit(): void {
     this.awsService.getRecordings();
     setTimeout(() => {
+      console.log("getting graph data")
       this.currentUser = localStorage.getItem('username');
       this.userLogs = JSON.parse(localStorage.getItem('logs'))
       this.userLogs.Items = this.userLogs.Items.sort((a, b) => (a.Date.S > b.Date.S ? 1 : -1));
@@ -34,7 +35,7 @@ export class GraphComponent implements OnInit {
         let date = this.userLogs.Items[i].Date.S;
         this.dates.push(date)
       }
-    },600)
+    },2400)
     console.log(this.dataScores)
     console.log(this.dates)
  
@@ -63,7 +64,7 @@ export class GraphComponent implements OnInit {
       }]
       }
     })
-    }, 800);
+    }, 2500);
     
   }
 

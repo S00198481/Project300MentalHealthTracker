@@ -21,7 +21,7 @@ export class AWSService {
   key: any;
   params: any;
   public users: any;
-  public user:string;
+  user:string;
   public userLogs:any;
 
 
@@ -70,26 +70,30 @@ export class AWSService {
     this.client.config.region = "eu-west-1"
     this.client.config.credentials = this.cred
     this.client.config.update({ region: "eu-west-1" })
-    var params = {
-      TableName: "AppRecordings",
-      KeyConditionExpression: "UserID = :id",
-      ExpressionAttributeValues: {
-        ":id": {
-          S: localStorage.getItem('username')
+    
+    setTimeout(() => {
+      console.log(this.user)
+      var params = {
+        TableName: "AppRecordings",
+        KeyConditionExpression: "UserID = :id",
+        ExpressionAttributeValues: {
+          ":id": {
+            S: localStorage.getItem('username')
+          }
         }
       }
-    }
-    this.client.query(params, function (err, data) {
-      if (err) {
-        console.error("Unable to read item. Error JSON:", JSON.stringify(err,
-          null, 2));
-      } else {
-        this.userLogs = data;
-        console.log(data)
-        localStorage.setItem('logs', JSON.stringify(data, null, 2))
-        //console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-      }
-    });
+      this.client.query(params, function (err, data) {
+        if (err) {
+          console.error("Unable to read item. Error JSON:", JSON.stringify(err,
+            null, 2));
+        } else {
+          this.userLogs = data;
+          console.log(data)
+          localStorage.setItem('logs', JSON.stringify(data, null, 2))
+        }
+      });
+    },2000)
+    
   }
 
   getUsers(username: string, password: string):boolean {
@@ -115,12 +119,8 @@ export class AWSService {
           if (data.Items[i].username.S == username && data.Items[i].password.S == password) {
             localStorage.setItem('username', data.Items[i].username.S);
             this.user = data.Items[i].username.S;
+            console.log(this.user)
             return true;
-          }
-          else {
-            console.log(username + " " + password)
-            console.log(data.Items[i].username.S + " " + data.Items[i].password.S)
-            return false;
           }
         }
       }
