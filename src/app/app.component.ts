@@ -16,6 +16,8 @@ export class AppComponent {
   recorderShow:boolean =false;
   chartShow:boolean=true;
 
+  
+
   ngOnInit(doShow)
   {
     doShow = this.Login.isShown
