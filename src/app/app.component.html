@@ -18,6 +18,7 @@
 </nav>
 
 <body>
+  
   <app-login *ngIf="!this.doShow" (isShown)="getShow($event)"></app-login>
   <app-recorder *ngIf="!this.loginShow && recorderShow==true"></app-recorder>
   <app-graph *ngIf="!this.loginShow && chartShow==true"></app-graph>
