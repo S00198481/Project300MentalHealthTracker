@@ -3,8 +3,10 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { DynamoDB } from 'node_modules/aws-sdk';
+import { CognitoIdentity } from 'node_modules/aws-sdk';
 import { Credentials } from 'node_modules/aws-sdk';
 import { v4 as uuidv4 } from 'node_modules/uuid';
+import moment from 'moment';
 
 
 @Injectable({
@@ -13,15 +15,19 @@ import { v4 as uuidv4 } from 'node_modules/uuid';
 export class AWSService {
 
   client = new DynamoDB({ region: "eu-west-1" });
-  cred = new Credentials("", "");
+  cognito = new CognitoIdentity
+  cred = new Credentials("AKIAWDJHI5VVRKEITGNG", "6sm+skj7bhPe3eTcdirE2YSgI0Gol8f4615EZ5QS");
   data: any;
   key: any;
   params: any;
   public users: any;
   user:string;
+  public userLogs:any;
 
 
-  constructor() { }
+  constructor() { 
+    this.cognito.getCredentialsForIdentity
+  }
 
   async sendData(text: string, emotion: string, sentiment: string) {
     this.client.config.region = "eu-west-1"
@@ -40,7 +46,7 @@ export class AWSService {
           S: this.key
         },
         "Date": {
-          S: new Date().toString()
+          S: moment(new Date).format('YYYY-MM-DD')
         },
         "Text": {
           S: text
@@ -64,23 +70,30 @@ export class AWSService {
     this.client.config.region = "eu-west-1"
     this.client.config.credentials = this.cred
     this.client.config.update({ region: "eu-west-1" })
-    var params = {
-      TableName: "AppRecordings",
-      KeyConditionExpression: "UserID = :id",
-      ExpressionAttributeValues: {
-        ":id": {
-          S: "username"
+    
+    setTimeout(() => {
+      console.log(this.user)
+      var params = {
+        TableName: "AppRecordings",
+        KeyConditionExpression: "UserID = :id",
+        ExpressionAttributeValues: {
+          ":id": {
+            S: localStorage.getItem('username')
+          }
         }
       }
-    }
-    this.client.query(params, function (err, data) {
-      if (err) {
-        console.error("Unable to read item. Error JSON:", JSON.stringify(err,
-          null, 2));
-      } else {
-        console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-      }
-    });
+      this.client.query(params, function (err, data) {
+        if (err) {
+          console.error("Unable to read item. Error JSON:", JSON.stringify(err,
+            null, 2));
+        } else {
+          this.userLogs = data;
+          console.log(data)
+          localStorage.setItem('logs', JSON.stringify(data, null, 2))
+        }
+      });
+    },2000)
+    
   }
 
   getUsers(username: string, password: string):boolean {
@@ -104,16 +117,10 @@ export class AWSService {
         console.log(data);
         for (let i = 0; i < data.Count; i++) {
           if (data.Items[i].username.S == username && data.Items[i].password.S == password) {
-            console.log("correct aws details")
             localStorage.setItem('username', data.Items[i].username.S);
-            console.log(this.user);
+            this.user = data.Items[i].username.S;
+            console.log(this.user)
             return true;
-          }
-          else {
-            console.log(username + " " + password)
-            console.log(data.Items[i].username.S + " " + data.Items[i].password.S)
-            console.log("incorrect aws details")
-            return false;
           }
         }
       }

@@ -9,13 +9,28 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 </head>
-</html>
+
+<nav class="navbar fixed-top nav justify-content-center" >
+  <a class="bi bi-box-arrow-left navbar-brand" style="font-size: 40px;" href="login/login.component.html"></a>
+<a class="logo">
+  <img src="assets/images/LogoMakr4ENNyl.png" class="img-fluid">
+</a>
+</nav>
+<script>
+  
+</script>
 <body>
+  
   <app-login *ngIf="!this.doShow" (isShown)="getShow($event)"></app-login>
-  <app-recorder *ngIf="!this.loginShow"></app-recorder>
+  <app-recorder *ngIf="!this.loginShow && recorderShow==true"></app-recorder>
+  <app-graph *ngIf="!this.loginShow && chartShow==true"></app-graph>
+  
 </body>
 
 <nav class="navbar fixed-bottom nav justify-content-center" >
-  <a class="bi bi-house-door navbar-brand justify-content-center" href="#" style="font-size: 40px;"></a>
-  <a class="bi bi-mic navbar-brand" href="@" style="font-size: 40px;"></a>
+  <a class="bi bi-house-door navbar-brand justify-content-center" style="font-size: 40px;" (click)="homeClick()"></a>
+  <a class="bi bi-mic navbar-brand" style="font-size: 40px;" (click)="recordClick()"></a>
 </nav>
+
+
+</html>

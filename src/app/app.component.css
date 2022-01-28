@@ -1,0 +1,11 @@
+.logo{
+    width: 100px;
+    border-radius: 30%;
+    margin-top: -2px;
+}
+
+.greeting {
+    text-align: center;
+    position: relative;
+}
+
