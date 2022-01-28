@@ -64,7 +64,9 @@ export class GraphComponent implements OnInit {
       }]
       }
     })
+    document.getElementById('username').innerText = "Hello " + this.currentUser + ", here is your report";
     }, 2500);
+    
     
   }
 

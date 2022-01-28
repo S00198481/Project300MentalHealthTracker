@@ -17,18 +17,13 @@
 </a>
 </nav>
 <script>
-  localStorage.getElementById('username').innerHTML = "Hello " + localStorage.getItem + " \n Welcome to your weekly report";
+  
 </script>
 <body>
   
   <app-login *ngIf="!this.doShow" (isShown)="getShow($event)"></app-login>
   <app-recorder *ngIf="!this.loginShow && recorderShow==true"></app-recorder>
   <app-graph *ngIf="!this.loginShow && chartShow==true"></app-graph>
-
-  <h1 class="greeting"> Hello (user) </h1>
-
-  <h2 class="greeting"> Welcome to your weekly report !!!! </h2>
-
   
 </body>
 
