@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from './service/login.service';
 import { GraphComponent } from './graph/graph.component';
 import { ChartsModule } from 'ng2-charts';
+import { ActivityComponent } from './activity/activity.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ChartsModule } from 'ng2-charts';
     AppComponent,
     RecorderComponent,
     LoginComponent,
-    GraphComponent
+    GraphComponent,
+    ActivityComponent
   ],
   imports: [
     BrowserModule,
