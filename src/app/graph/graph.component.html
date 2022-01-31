@@ -4,7 +4,11 @@
             <div class="card">
                 <div class="card-body">
                     <h2 id="username"></h2>
-                    <canvas id="moodChart"></canvas>
+                    <canvas id="moodChart" (click)="showData($event)"></canvas>
+                </div>
+                <div class="card-body">
+                    <h2>Daily Breakdown - Select a day to view details</h2>
+                    <canvas id="emotionChart"></canvas>
                 </div>
             </div>
         </div>
