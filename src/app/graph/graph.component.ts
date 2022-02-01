@@ -21,6 +21,7 @@ export class GraphComponent implements OnInit {
   userLogs:any;
   dataScores:number[] = [];
   dates:string[] = [];
+  selectedDayIndex: number;
 
   ngOnInit(): void {
     this.awsService.getRecordings();
@@ -40,19 +41,6 @@ export class GraphComponent implements OnInit {
     console.log(this.dates)
  
     var myLineChart
-
-    var option = {
-      showLines: true,
-      onClick: function(evt) {   
-        var element = myLineChart.getElementAtEvent(evt);
-        if(element.length > 0)
-        {
-          var ind = element[0]._index;
-          if(confirm('Do you want to remove this point?')){
-            }
-          }
-        }
-    };
 
     setTimeout(() => {
     this.ctx = (<HTMLElement>document.getElementById('moodChart'));
@@ -77,7 +65,9 @@ export class GraphComponent implements OnInit {
 
   showData(evt:any){
     var data = this.chart.getElementsAtEvent(evt)
-    alert(data[0]) // it prints the value of the property
+    this.selectedDayIndex = data[0]._index
+    //alert(this.userLogs.Items[data[0]._index].Date.S)
+    document.getElementById('day').textContent = "Daily Breakdown - " + this.userLogs.Items[this.selectedDayIndex].Date.S
   }
 
   compare( a, b ) {
