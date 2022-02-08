@@ -1,6 +1,18 @@
-<div class ="form-box">
-<h1 class="login"> Login </h1>
-<input class ="input-box" type="text" id="usernameField" name="usernameField" placeholder="Name"/>
-<input class ="input-box" type="password" id="passwordField" name="passwordField" placeholder="Password"/>
-<button class="btn btn-" (click)="componentOnSubmit()">Submit</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-5 col-md-8">
+            <form class="bg-white rcorners1 rounded-5 shadow-5-strong p-5">
+                <div class="form-outline mb-4">
+                    <input class="form-control" type="text" id="usernameField" name="usernameField" placeholder="Name"/>
+                </div>
+                <div class="form-outline mb-4">
+                    <input class="form-control" type="password" id="passwordField" name="passwordField"
+                        placeholder="Password" />
+                </div>
+                <div class="text-center">
+                <button class="btn btn-primary btn-block text-center" (click)="componentOnSubmit()">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
 </div>
