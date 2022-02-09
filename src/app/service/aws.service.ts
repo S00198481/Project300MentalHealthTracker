@@ -29,7 +29,7 @@ export class AWSService {
     this.cognito.getCredentialsForIdentity
   }
 
-  async sendData(text: string, emotion: string, sentiment: string) {
+  async sendData(text: string, emotion: string, sentiment: string, activities: string) {
     this.client.config.region = "eu-west-1"
     this.client.config.credentials = this.cred
     this.client.config.update({ region: "eu-west-1" })
@@ -56,6 +56,9 @@ export class AWSService {
         },
         "Sentiment": {
           S: sentiment
+        },
+        "Activities": {
+          S: activities
         }
       }
     };
