@@ -15,6 +15,7 @@ export class AppComponent {
   loginShow:boolean = true;
   recorderShow:boolean =false;
   chartShow:boolean=true;
+  sentimentShow : boolean =true;
 
   
 
@@ -32,6 +33,7 @@ export class AppComponent {
     if(!this.loginShow) {
       this.doShow = true;
       this.chartShow = true;
+      this.sentimentShow = false;
       this.recorderShow = false;
     }
   }
@@ -39,7 +41,15 @@ export class AppComponent {
   recordClick() {
     if(!this.loginShow) {
       this.chartShow = false;
+      this.sentimentShow = false;
       this.recorderShow = true;
+    }
+  }
+  sentimentClick() {
+    if(!this.loginShow) {
+      this.chartShow = false;
+      this.recorderShow = false;
+      this.sentimentShow = true;
     }
   }
 }
