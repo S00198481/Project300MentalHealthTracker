@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, ChartDataSets,ChartLineOptions,GridLineOptions} from 'chart.js';
-import { Color,Label,ChartsModule} from 'ng2-charts';
+import { Chart, ChartDataSets, ChartLineOptions, GridLineOptions } from 'chart.js';
+import { Color, Label, ChartsModule } from 'ng2-charts';
 import { utils } from 'protractor';
 import { AWSService } from '../service/aws.service';
 
@@ -13,14 +13,16 @@ export class GraphComponent implements OnInit {
 
   errorMessage: any;
 
-  constructor(private awsService:AWSService) { }
+  constructor(private awsService: AWSService) { }
 
-  ctx:any;
-  chart:any;
-  currentUser:string;
-  userLogs:any;
-  dataScores:number[] = [];
-  dates:string[] = [];
+  ctx: any;
+  chart: any;
+  chart2: any;
+  currentUser: string;
+  userLogs: any;
+  dataScores: number[] = [];
+  dates: string[] = [];
+  selectedDayIndex: number;
 
   ngOnInit(): void {
     this.awsService.getRecordings();
@@ -35,50 +37,75 @@ export class GraphComponent implements OnInit {
         let date = this.userLogs.Items[i].Date.S;
         this.dates.push(date)
       }
-    },2400)
+    }, 2400)
     console.log(this.dataScores)
     console.log(this.dates)
- 
+
     setTimeout(() => {
-    this.ctx = (<HTMLElement>document.getElementById('moodChart'));
-    this.chart = new Chart(this.ctx, {
-      type: 'line',
-      options:{
-        animation:{
-          duration: 2000,
-          easing: 'easeOutExpo'
+      this.ctx = (<HTMLElement>document.getElementById('moodChart'));
+      this.chart = new Chart(this.ctx, {
+        type: 'line',
+        options: {
+          onClick: this.showData.bind(this)
         },
-        responsive: true
-      },
-      plugins:[{
-        
-      }],
-      data: {
-        labels: this.dates,
-        datasets: [{ data: this.dataScores, label:"Daily Progression",
-        borderColor:'#009090',
-        pointStyle:'rectRot',
-        pointRadius:7,
-        fill:'false'
-        
-      }]
-      }
-    })
-    document.getElementById('username').innerText = "Hello " + this.currentUser + ", here is your report";
+        data: {
+          labels: this.dates,
+          datasets: [{
+            data: this.dataScores, label: "Daily Progression",
+            borderColor: '#009090',
+            pointStyle: 'rectRot',
+            pointRadius: 7,
+            fill: 'false'
+          }]
+        }
+      })
+      document.getElementById('username').innerText = "Hello " + this.currentUser + ", here is your report";
     }, 2500);
-    
-    
   }
 
-  compare( a, b ) {
-    if ( a.Date < b.Date ){
+  showData(evt: any) {
+
+    if(this.chart2 != null) {
+      this.chart2.destroy();
+    }
+    
+    var data: JSON = this.chart.getElementsAtEvent(evt)
+    console.log(data)
+    if (data[0] != null) {
+      var index: number = data[0]._index
+      console.log(index)
+
+      document.getElementById('day').textContent = "Daily Breakdown - " + this.userLogs.Items[index].Date.S
+
+      var dayData: any = this.userLogs.Items[index]
+      console.log(dayData)
+      var dayEmotions: any = JSON.parse(dayData.Emotion.S);
+      var emotionObject = dayEmotions.emotion_scores
+      console.log(emotionObject)
+
+      var barEmotions: any = [emotionObject.anger, emotionObject.disgust, emotionObject.fear, emotionObject.joy, emotionObject.sadness, emotionObject.surprise]
+      var barLabels: any = ["Anger", "Disgust", "Fear", "Joy", "Sadness", "Surprise"]
+
+
+      this.ctx = (<HTMLElement>document.getElementById('emotionChart'));
+      this.chart2 = new Chart(this.ctx, {
+        type: 'pie',
+        data: {
+          labels: barLabels,
+          datasets: [{ data: barEmotions, label: "Emotions", backgroundColor: ["#CC1F36", "#638600", "#00655B", "#8F497B", "#D2B25B", "#F592E2"] }],
+        }
+      })
+    }
+  }
+
+  compare(a, b) {
+    if (a.Date < b.Date) {
       return -1;
     }
-    if ( a.Date > b.Date ){
+    if (a.Date > b.Date) {
       return 1;
     }
     return 0;
   }
-  
 
 }
