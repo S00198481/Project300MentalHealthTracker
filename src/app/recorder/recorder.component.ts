@@ -87,12 +87,22 @@ export class RecorderComponent implements OnInit {
       this.activityJSON = JSON.stringify(this.activity)
       this.AWSService.sendData(this.userText, this.emotion, this.sentiment, this.activityJSON);
      }, 10000);
-
   }
 
   processData() {
+    if (document.getElementById("text").textContent != null) {
     this.userText = document.getElementById("text").textContent
     this.userText = this.userText.split(" ").join("%20");
+    } 
+
+    var textArea = document.getElementById("text2") as HTMLInputElement
+
+    if (textArea.value != null) {
+    this.userText = textArea.value
+    this.userText = this.userText.split(" ").join("%20");
+    }
+
+    console.log(this.userText)
     
   this.sentimentService.getEmotion(this.userText).subscribe(
       emotion => {

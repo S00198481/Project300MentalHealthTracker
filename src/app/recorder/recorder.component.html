@@ -2,13 +2,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 </head>
 <body>
-<div class="text-speach" style="margin: 100px;">
+    <div>
+        <h1 style="float: center; margin-top: 20%; position: relative;">Tell us how your day went</h1>
+        <h2 style="float: center">What happened during your day?</h2>
+    </div>
+<div class="text-speach" style="margin: 70px;">
     <h1 class="voice-recognition">Voice recognition</h1>
     
     <p id=text>{{voiceService.text}}</p>
 
     <button style="margin: 10px;" class="bi bi-mic btn btn-" (click)="recording = !recording" (click)="buttonPress()">{{recording ? 'Stop' : 'Start'}}</button>
     <button style="margin: 10px;" class="btn btn-" (click)="recording = !recording" (click)="submitData()">Submit</button>
+</div>
+
+<div class="form-group">
+    <label for="text2">Or type here:</label>
+    <textarea class="form-control" rows="5" id="text2"></textarea>
 </div>
 
 <div>
