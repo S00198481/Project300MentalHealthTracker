@@ -92,7 +92,7 @@ export class GraphComponent implements OnInit {
         type: 'pie',
         data: {
           labels: barLabels,
-          datasets: [{ data: barEmotions, label: "Emotions", backgroundColor: ["#CC1F36", "#638600", "#00655B", "#8F497B", "#D2B25B", "#8F497B"] }],
+          datasets: [{ data: barEmotions, label: "Emotions", backgroundColor: ["#CC1F36", "#638600", "#00655B", "#8F497B", "#D2B25B", "#F592E2"] }],
         }
       })
     }
