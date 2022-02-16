@@ -24,7 +24,7 @@
   <app-login *ngIf="!this.doShow" (isShown)="getShow($event)"></app-login>
   <app-recorder *ngIf="!this.loginShow && recorderShow==true"></app-recorder>
   <app-graph *ngIf="!this.loginShow && chartShow==true"></app-graph>
-  <app-sentiment *ngIf="!this.loginShow && sentimentShow == true"></app-sentiment>
+  <app-sentiment-correlation *ngIf="!this.loginShow && sentimentShow==true"></app-sentiment-correlation>
   
 </body>
 

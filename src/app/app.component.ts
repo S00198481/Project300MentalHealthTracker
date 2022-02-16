@@ -15,7 +15,7 @@ export class AppComponent {
   loginShow:boolean = true;
   recorderShow:boolean =false;
   chartShow:boolean=true;
-  sentimentShow : boolean =true;
+  sentimentShow : boolean =false;
 
   
 
