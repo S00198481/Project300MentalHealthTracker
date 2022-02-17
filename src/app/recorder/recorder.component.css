@@ -11,5 +11,16 @@ body {
 .voice-recognition{
     position: relative;
     color: black;
-    
+}
+.display-2{
+    margin-top: 8%;
+}
+
+.form-control{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    width: min-content;
+
 }
