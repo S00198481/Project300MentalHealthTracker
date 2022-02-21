@@ -9,8 +9,13 @@ import { AWSService } from '../service/aws.service';
 export class SentimentCorrelationComponent implements OnInit {
   currentUser: string;
   userLogs: any;
+  userLogsForDisplay: JSON[] = [];
+  activityLogs:JSON[] = [];
   dataScores: any;
   dates: any;
+  dailyInsights: any[][];
+  allScores:number[] = [];
+
 
   constructor(private awsService:AWSService) { }
 
@@ -22,9 +27,32 @@ export class SentimentCorrelationComponent implements OnInit {
       this.userLogs = JSON.parse(localStorage.getItem('logs'))
       //this.userLogs.Items = this.userLogs.Items.sort((a, b) => (a.Date.S > b.Date.S ? 1 : -1));
       console.log(this.userLogs);
-    console.log("hello");
-    },2400)
-    
+      console.log("hello");
+      this.calculatePositiveCorrelations();
+    },2400)   
   }
 
+  calculatePositiveCorrelations() {
+    this.userLogs.Items.forEach(log => {
+      if (JSON.parse(log.Sentiment.S).type == "positive") {
+        this.userLogsForDisplay.push(JSON.parse(log.Sentiment.S));
+        this.activityLogs.push(JSON.parse(log.Activities.S));
+      }
+    });
+    console.log(this.userLogsForDisplay);
+    console.log(this.activityLogs);
+  }
+
+  calculateNegativeCorrelations() {
+    this.userLogs.Items.forEach(log => {
+      if (JSON.parse(log.Sentiment.S).type == "negative") {
+        this.userLogsForDisplay.push(JSON.parse(log.Sentiment.S));
+      }
+    });
+    console.log(this.userLogsForDisplay);
+  }
+
+  getEffect(): boolean {
+    return false;
+  }
 }
