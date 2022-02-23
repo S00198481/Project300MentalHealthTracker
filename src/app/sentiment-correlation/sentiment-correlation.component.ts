@@ -37,6 +37,9 @@ export class SentimentCorrelationComponent implements OnInit {
   }
 
   calculatePositiveCorrelations() {
+    this.activityLogs = [];
+    this.userLogsForDisplay = [];
+    this.userLogsSentiment = [];
     this.userLogs.Items.forEach(log => {
       if (JSON.parse(log.Sentiment.S).type == "positive") {
         this.userLogsForDisplay.push((log));
@@ -51,6 +54,9 @@ export class SentimentCorrelationComponent implements OnInit {
   }
 
   calculateNegativeCorrelations() {
+    this.activityLogs = [];
+    this.userLogsForDisplay = [];
+    this.userLogsSentiment = [];
     this.userLogs.Items.forEach(log => {
       if (JSON.parse(log.Sentiment.S).type == "negative") {
         this.userLogsForDisplay.push((log));
@@ -74,7 +80,7 @@ export class SentimentCorrelationComponent implements OnInit {
 
     
     var root = document.createElement("div");
-    root.classList.add("mx-auto", "m-10", "row", "justify-content-center", "w-80");
+    root.classList.add("mx-auto", "row", "justify-content-center", "w-50");
     root.setAttribute("id", "container");
     if(root.firstChild != null) {
       while(root.hasChildNodes) {
@@ -90,11 +96,12 @@ export class SentimentCorrelationComponent implements OnInit {
       card.classList.add('card-body');
 
       var content = 
-      `<div class="card border-${cardType} m-3 col-12" style="max-width: 18rem;">
-          <div class="card-header">${this.userLogsForDisplay[i].Date.S}</div>
+      `<div class="card border-${cardType} p-0 m-2 col-5">
+          <div class="card-header bg-${cardType} text-white">${this.userLogsForDisplay[i].Date.S}</div>
           <div class="card-body text-${cardType}Activity">
             <h5 class="card-title">${sentiment}</h5>
-            <p class="card-text">On this day, the following activities made you feel ${sentiment}.</p>
+            <p class="card-text">Activities completed on this day:</p>
+            <h5 class="card-text">${(this.activityLogs[i].toString()).replace(/,/g, ', ')}.</h5>
         </div>
       </div>`
       root.innerHTML += content;
