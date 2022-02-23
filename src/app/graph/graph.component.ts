@@ -33,7 +33,7 @@ export class GraphComponent implements OnInit {
       this.userLogs.Items = this.userLogs.Items.sort((a, b) => (a.Date.S > b.Date.S ? 1 : -1));
       for (let i = 0; i < this.userLogs.Count; i++) {
         let sentiment = JSON.parse(this.userLogs.Items[i].Sentiment.S);
-        this.dataScores.push(sentiment.score)
+        this.dataScores.push((sentiment.score*100)*2)
         let date = this.userLogs.Items[i].Date.S;
         this.dates.push(date)
       }

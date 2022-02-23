@@ -16,29 +16,8 @@
   <img src="assets/images/LogoMakr4ENNyl.png" class="img-fluid">
 </a> 
 </nav>
-<script>
-  
-</script>
 
-<body>
-
-  <div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Disclaimer</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>This app is not to be used as substitution for professional help. If you are at risk or in a particularly difficult place, please seek professional aid immediately.</p>
-      </div>
-      <button type="button" class="btn btn-primary">Close</button>
-    </div>
-    </div>
-   </div>
-  
+<body>  
   <app-login *ngIf="!this.doShow" (isShown)="getShow($event)"></app-login>
   <app-recorder *ngIf="!this.loginShow && recorderShow==true"></app-recorder>
   <app-graph *ngIf="!this.loginShow && chartShow==true"></app-graph>
