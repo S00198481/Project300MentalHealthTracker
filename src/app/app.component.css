@@ -8,4 +8,8 @@
     text-align: center;
     position: relative;
 }
+.clear { 
+    clear: both; 
+    height: 60px; 
+}
 
