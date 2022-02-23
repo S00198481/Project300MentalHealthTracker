@@ -1,3 +1,4 @@
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { AWSService } from '../service/aws.service';
 
@@ -9,7 +10,8 @@ import { AWSService } from '../service/aws.service';
 export class SentimentCorrelationComponent implements OnInit {
   currentUser: string;
   userLogs: any;
-  userLogsForDisplay: JSON[] = [];
+  userLogsForDisplay: any[] = [];
+  userLogsSentiment: JSON[] = [];
   activityLogs:JSON[] = [];
   dataScores: any;
   dates: any;
@@ -28,28 +30,77 @@ export class SentimentCorrelationComponent implements OnInit {
       //this.userLogs.Items = this.userLogs.Items.sort((a, b) => (a.Date.S > b.Date.S ? 1 : -1));
       console.log(this.userLogs);
       console.log("hello");
-      this.calculatePositiveCorrelations();
+      
+    this.calculatePositiveCorrelations()
     },2400)   
+
   }
 
   calculatePositiveCorrelations() {
     this.userLogs.Items.forEach(log => {
       if (JSON.parse(log.Sentiment.S).type == "positive") {
-        this.userLogsForDisplay.push(JSON.parse(log.Sentiment.S));
+        this.userLogsForDisplay.push((log));
+        this.userLogsSentiment.push(JSON.parse(log.Sentiment.S));
         this.activityLogs.push(JSON.parse(log.Activities.S));
       }
     });
     console.log(this.userLogsForDisplay);
     console.log(this.activityLogs);
+    console.log(this.userLogsSentiment);
+    this.createCards("Positive", "success");
   }
 
   calculateNegativeCorrelations() {
     this.userLogs.Items.forEach(log => {
       if (JSON.parse(log.Sentiment.S).type == "negative") {
-        this.userLogsForDisplay.push(JSON.parse(log.Sentiment.S));
+        this.userLogsForDisplay.push((log));
+        this.userLogsSentiment.push(JSON.parse(log.Sentiment.S));
+        this.activityLogs.push(JSON.parse(log.Activities.S));
       }
     });
     console.log(this.userLogsForDisplay);
+    console.log(this.activityLogs);
+    console.log(this.userLogsSentiment);
+    this.createCards("Negative", "danger");
+  }
+
+  createCards(sentiment:string, cardType:string) {
+    var origin = document.getElementById("root");
+
+    if(document.getElementById("container")) {
+      var child = document.getElementById("container")
+      origin.removeChild(child)
+    }
+
+    
+    var root = document.createElement("div");
+    root.classList.add("mx-auto", "m-10", "row", "justify-content-center", "w-80");
+    root.setAttribute("id", "container");
+    if(root.firstChild != null) {
+      while(root.hasChildNodes) {
+        var elem = root.firstChild
+        if(elem != null) {
+          root.removeChild(elem);
+        }
+      }
+    }
+    
+    for(var i=0; i<this.userLogsForDisplay.length; i++){
+      var card = document.createElement('div');
+      card.classList.add('card-body');
+
+      var content = 
+      `<div class="card border-${cardType} m-3 col-12" style="max-width: 18rem;">
+          <div class="card-header">${this.userLogsForDisplay[i].Date.S}</div>
+          <div class="card-body text-${cardType}Activity">
+            <h5 class="card-title">${sentiment}</h5>
+            <p class="card-text">On this day, the following activities made you feel ${sentiment}.</p>
+        </div>
+      </div>`
+      root.innerHTML += content;
+      origin.appendChild(root)
+
+    };
   }
 
   getEffect(): boolean {
