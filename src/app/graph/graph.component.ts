@@ -23,6 +23,7 @@ export class GraphComponent implements OnInit {
   dataScores: number[] = [];
   dates: string[] = [];
   selectedDayIndex: number;
+  alertHide: boolean = false;
 
   ngOnInit(): void {
     this.awsService.getRecordings();
