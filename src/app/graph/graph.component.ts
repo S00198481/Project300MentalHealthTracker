@@ -48,7 +48,8 @@ export class GraphComponent implements OnInit {
       this.chart = new Chart(this.ctx, {
         type: 'line',
         options: {
-          onClick: this.showData.bind(this)
+          onClick: this.showData.bind(this),
+          maintainAspectRatio: false
         },
         data: {
           labels: this.dates,
@@ -56,7 +57,8 @@ export class GraphComponent implements OnInit {
             data: this.dataScores, label: "Daily Progression",
             borderColor: '#009090',
             pointStyle: 'rectRot',
-            pointRadius: 7,
+            pointRadius: 10,
+            pointHoverRadius: 20,
             fill: 'false'
           }]
         }

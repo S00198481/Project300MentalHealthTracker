@@ -80,7 +80,7 @@ export class SentimentCorrelationComponent implements OnInit {
 
     
     var root = document.createElement("div");
-    root.classList.add("mx-auto", "row", "justify-content-center", "w-50");
+    root.classList.add("mx-auto", "row", "justify-content-center", "w-75");
     root.setAttribute("id", "container");
     if(root.firstChild != null) {
       while(root.hasChildNodes) {
@@ -96,7 +96,7 @@ export class SentimentCorrelationComponent implements OnInit {
       card.classList.add('card-body');
 
       var content = 
-      `<div class="card border-${cardType} p-0 m-2 col-5">
+      `<div class="card border-${cardType} p-0 m-2 col-sm">
           <div class="card-header bg-${cardType} text-white">${this.userLogsForDisplay[i].Date.S}</div>
           <div class="card-body text-${cardType}Activity">
             <h5 class="card-title">${sentiment}</h5>

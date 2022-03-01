@@ -22,13 +22,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-12" [hidden]="loaded==false">
+        <div class="col" [hidden]="loaded==false">
             <div class="card">
                 <div class="card-body">
                     <h2 id="username"></h2>
                     <p>The graph below displays the positive or negative score from each day from 100 to -100. 100
                         refers to maximum positive emotion, -100 refers to maximum negative emotion</p>
-                    <canvas id="moodChart"></canvas>
+                    <div style="overflow-x: scroll">
+                        <div class="chart-container" style="position: relative; height:300px; width:1500px;">
+                            <canvas id="moodChart"></canvas>
+                        </div>
+                      </div>
                 </div>
                 <div>
                     <h2 id="day">Daily Breakdown - Select a day to view details</h2>
