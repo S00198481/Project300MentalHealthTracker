@@ -24,6 +24,7 @@ export class GraphComponent implements OnInit {
   dates: string[] = [];
   selectedDayIndex: number;
   alertHide: boolean = false;
+  loaded: boolean = false;
 
   ngOnInit(): void {
     this.awsService.getRecordings();
@@ -61,6 +62,7 @@ export class GraphComponent implements OnInit {
         }
       })
       document.getElementById('username').innerText = "Hello " + this.currentUser + ", here is your report";
+      this.loaded = true;
     }, 2500);
   }
 

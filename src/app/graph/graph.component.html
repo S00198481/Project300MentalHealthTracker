@@ -1,26 +1,42 @@
 <div class="container">
     <div class="row">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert"
-        [hidden]="alertHide==true">
-        <strong>WARNING</strong> Please be aware that this is application is not a psychological care tool. If you feel you may hurt yourself or others, please seek professional care.
-        <button type="button" class="mr-0 btn close" (click)="alertHide=true">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-        <div class="col-12">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" [hidden]="alertHide==true">
+            <strong>WARNING</strong> Please be aware that this is application is not a psychological care tool. If you
+            feel you may hurt yourself or others, please seek professional care.
+            <button type="button" class="mr-0 btn close" (click)="alertHide=true">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="container" [hidden]="loaded==true">
+            <div class="row">
+                <div id="loader">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="loading"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" [hidden]="loaded==false">
             <div class="card">
                 <div class="card-body">
                     <h2 id="username"></h2>
-                    <p>The graph below displays the positive or negative score from each day from 100 to -100. 100 refers to maximum positive emotion, -100 refers to maximum negative emotion</p>
+                    <p>The graph below displays the positive or negative score from each day from 100 to -100. 100
+                        refers to maximum positive emotion, -100 refers to maximum negative emotion</p>
                     <canvas id="moodChart"></canvas>
                 </div>
-                <div >
+                <div>
                     <h2 id="day">Daily Breakdown - Select a day to view details</h2>
                     <div class="row">
-                    <canvas class="h-10 card-body h-10" id="emotionChart"></canvas>
+                        <canvas class="h-10 card-body h-10" id="emotionChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-     </div>     
+    </div>
 </div>
