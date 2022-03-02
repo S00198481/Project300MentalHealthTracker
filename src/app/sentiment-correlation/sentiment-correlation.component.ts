@@ -17,6 +17,7 @@ export class SentimentCorrelationComponent implements OnInit {
   dates: any;
   dailyInsights: any[][];
   allScores:number[] = [];
+  loaded: boolean = false;
 
 
   constructor(private awsService:AWSService) { }
@@ -29,9 +30,9 @@ export class SentimentCorrelationComponent implements OnInit {
       this.userLogs = JSON.parse(localStorage.getItem('logs'))
       //this.userLogs.Items = this.userLogs.Items.sort((a, b) => (a.Date.S > b.Date.S ? 1 : -1));
       console.log(this.userLogs);
-      console.log("hello");
       
     this.calculatePositiveCorrelations()
+    this.loaded = true;
     },2400)   
 
   }
