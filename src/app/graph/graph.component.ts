@@ -70,12 +70,16 @@ export class GraphComponent implements OnInit {
 
   showData(evt: any) {
 
+    
+
+    var data: JSON = this.chart.getElementsAtEvent(evt)
+    console.log(data);
+    if(data[0] == null) {
+      return;
+    }
     if(this.chart2 != null) {
       this.chart2.destroy();
     }
-    
-    var data: JSON = this.chart.getElementsAtEvent(evt)
-    console.log(data)
     if (data[0] != null) {
       var index: number = data[0]._index
       console.log(index)
