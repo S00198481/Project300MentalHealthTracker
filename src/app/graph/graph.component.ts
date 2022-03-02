@@ -49,7 +49,24 @@ export class GraphComponent implements OnInit {
         type: 'line',
         options: {
           onClick: this.showData.bind(this),
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+              label: function(tooltipItem, data) {
+                var allData:any[] = data.datasets[tooltipItem.datasetIndex].data;
+                let sum = 0;
+                let dataArr = data.datasets[0].data;
+                dataArr.forEach(data => {
+                    sum += data;
+                });
+                var tooltipData:number = allData[tooltipItem.index];
+                tooltipData = (tooltipData) * 100
+                return (Math.round(tooltipData/sum)) + "%";
+              }
+            }
+          }
         },
         data: {
           labels: this.dates,
@@ -59,7 +76,7 @@ export class GraphComponent implements OnInit {
             pointStyle: 'rectRot',
             pointRadius: 10,
             pointHoverRadius: 20,
-            fill: 'false'
+            fill: 'true'
           }]
         }
       })
@@ -102,8 +119,28 @@ export class GraphComponent implements OnInit {
         data: {
           labels: barLabels,
           datasets: [{ data: barEmotions, label: "Emotions", backgroundColor: ["#CC1F36", "#638600", "#00655B", "#8F497B", "#D2B25B", "#F592E2"] }],
+        },
+        options: {
+          tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+              label: function(tooltipItem, data) {
+                var allData:any[] = data.datasets[tooltipItem.datasetIndex].data;
+                let sum = 0;
+                let dataArr = data.datasets[0].data;
+                dataArr.forEach(data => {
+                    sum += data;
+                });
+                var tooltipLabel = data.labels[tooltipItem.index];
+                var tooltipData:number = allData[tooltipItem.index];
+                tooltipData = (tooltipData) * 100
+                return tooltipLabel + ": " + (Math.round(tooltipData/sum)) + "%";
+              }
+            }
+          }
         }
-      })
+       })
     }
   }
 
