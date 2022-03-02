@@ -97,11 +97,11 @@ export class SentimentCorrelationComponent implements OnInit {
       card.classList.add('card-body');
 
       var content = 
-      `<div class="card border-${cardType} p-0 m-2 col-sm">
+      `<div class="card border-${cardType} p-0 m-2 col-sm col-lg-4">
           <div class="card-header bg-${cardType} text-white">${this.userLogsForDisplay[i].Date.S}</div>
-          <div class="card-body text-${cardType}Activity">
-            <h5 class="card-title">${sentiment}</h5>
-            <p class="card-text">Activities completed on this day:</p>
+          <div class="card-body">
+            <h5 class="card-title">${sentiment} Activities</h5>
+            <p class="card-text">You felt ${sentiment} when you engaged in the following:</p>
             <h5 class="card-text">${(this.activityLogs[i].toString()).replace(/,/g, ', ')}.</h5>
         </div>
       </div>`

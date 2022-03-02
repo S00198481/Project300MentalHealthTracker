@@ -48,6 +48,9 @@ export class GraphComponent implements OnInit {
       this.chart = new Chart(this.ctx, {
         type: 'line',
         options: {
+          legend: {
+            display: false
+          },
           onClick: this.showData.bind(this),
           maintainAspectRatio: false,
           tooltips: {
@@ -63,7 +66,13 @@ export class GraphComponent implements OnInit {
                 });
                 var tooltipData: number = allData[tooltipItem.index];
                 tooltipData = (tooltipData) * 100
-                return (Math.round(tooltipData / sum)) + "%";
+
+                if(tooltipData > 0) {
+                  return (Math.round(tooltipData / sum)) + "% Positive";
+                }
+                if(tooltipData < 0) {
+                  return (Math.round((tooltipData / sum))*-1) + "% Negative";
+                }
               }
             }
           }
@@ -118,6 +127,7 @@ export class GraphComponent implements OnInit {
           datasets: [{ data: barEmotions, label: "Emotions", backgroundColor: ["#CC1F36", "#638600", "#00655B", "#8F497B", "#D2B25B", "#F592E2"] }],
         },
         options: {
+          maintainAspectRatio: false,
           tooltips: {
             enabled: true,
             mode: 'single',

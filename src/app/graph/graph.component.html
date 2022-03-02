@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        
+
         <div class="container" [hidden]="loaded==true">
             <div class="row">
                 <div id="loader">
@@ -18,7 +18,8 @@
         </div>
         <div class="col" [hidden]="loaded==false">
             <div class="alert alert-warning alert-dismissible fade show" role="alert" [hidden]="alertHide==true">
-                <strong>WARNING</strong> Please be aware that this is application is not a psychological care tool. If you
+                <strong>WARNING</strong> Please be aware that this is application is not a psychological care tool. If
+                you
                 feel you may hurt yourself or others, please seek professional care.
                 <button type="button" class="mr-0 btn close" (click)="alertHide=true">
                     <span aria-hidden="true">&times;</span>
@@ -29,17 +30,19 @@
                     <h2 id="username"></h2>
                     <p>The graph below displays the positive or negative score from each day from 100 to -100. 100
                         refers to maximum positive emotion, -100 refers to maximum negative emotion</p>
-                    <div style="overflow-x: scroll; display: flex; flex-direction: row-reverse;">
-                        <div class="chart-container" style="position: relative; height:300px; width:1500px;">
-                            <canvas id="moodChart"></canvas>
+                    <div style="direction: ltr">
+                        <div style="overflow-x: scroll; direction: rtl">
+                            <div class="chart-container" style="position: relative; height:300px; width:1500px;">
+                                <canvas id="moodChart"></canvas>
+                            </div>
                         </div>
-                      </div>
-                </div>
-                <div>
-                    <h2 id="day">Daily Breakdown - Select a day to view details</h2>
-                    <div class="row">
-                        <canvas class="h-10 card-body h-10" id="emotionChart"></canvas>
                     </div>
+                
+                    <h2 class="mt-2" id="day">Daily Breakdown - Select a day to view details</h2>
+                    <p>The graph below breaks down the emotions detected on your selected day.</p>
+                    <div class="row" style="height: 600px">
+                        <canvas class="h-10 card-body h-110" id="emotionChart"></canvas>
+                    </div>  
                 </div>
             </div>
         </div>
