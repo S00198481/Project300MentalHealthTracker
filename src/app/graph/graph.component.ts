@@ -35,7 +35,7 @@ export class GraphComponent implements OnInit {
       this.userLogs.Items = this.userLogs.Items.sort((a, b) => (a.Date.S > b.Date.S ? 1 : -1));
       for (let i = 0; i < this.userLogs.Count; i++) {
         let sentiment = JSON.parse(this.userLogs.Items[i].Sentiment.S);
-        this.dataScores.push((sentiment.score*100)*2)
+        this.dataScores.push((sentiment.score * 100) * 2)
         let date = this.userLogs.Items[i].Date.S;
         this.dates.push(date)
       }
@@ -54,16 +54,16 @@ export class GraphComponent implements OnInit {
             enabled: true,
             mode: 'single',
             callbacks: {
-              label: function(tooltipItem, data) {
-                var allData:any[] = data.datasets[tooltipItem.datasetIndex].data;
+              label: function (tooltipItem, data) {
+                var allData: any[] = data.datasets[tooltipItem.datasetIndex].data;
                 let sum = 0;
                 let dataArr = data.datasets[0].data;
                 dataArr.forEach(data => {
-                    sum += data;
+                  sum += data;
                 });
-                var tooltipData:number = allData[tooltipItem.index];
+                var tooltipData: number = allData[tooltipItem.index];
                 tooltipData = (tooltipData) * 100
-                return (Math.round(tooltipData/sum)) + "%";
+                return (Math.round(tooltipData / sum)) + "%";
               }
             }
           }
@@ -86,15 +86,12 @@ export class GraphComponent implements OnInit {
   }
 
   showData(evt: any) {
-
-    
-
     var data: JSON = this.chart.getElementsAtEvent(evt)
     console.log(data);
-    if(data[0] == null) {
+    if (data[0] == null) {
       return;
     }
-    if(this.chart2 != null) {
+    if (this.chart2 != null) {
       this.chart2.destroy();
     }
     if (data[0] != null) {
@@ -125,22 +122,22 @@ export class GraphComponent implements OnInit {
             enabled: true,
             mode: 'single',
             callbacks: {
-              label: function(tooltipItem, data) {
-                var allData:any[] = data.datasets[tooltipItem.datasetIndex].data;
+              label: function (tooltipItem, data) {
+                var allData: any[] = data.datasets[tooltipItem.datasetIndex].data;
                 let sum = 0;
                 let dataArr = data.datasets[0].data;
                 dataArr.forEach(data => {
-                    sum += data;
+                  sum += data;
                 });
                 var tooltipLabel = data.labels[tooltipItem.index];
-                var tooltipData:number = allData[tooltipItem.index];
+                var tooltipData: number = allData[tooltipItem.index];
                 tooltipData = (tooltipData) * 100
-                return tooltipLabel + ": " + (Math.round(tooltipData/sum)) + "%";
+                return tooltipLabel + ": " + (Math.round(tooltipData / sum)) + "%";
               }
             }
           }
         }
-       })
+      })
     }
   }
 
