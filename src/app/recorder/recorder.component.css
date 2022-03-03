@@ -24,3 +24,12 @@ body {
     width: min-content;
 
 }
+
+.btn-circle {
+    width: 100px;
+    height: 100px;
+    padding: 10px 16px;
+    border-radius: 100px;
+    font-size: 20px;
+    text-align: center;
+}
