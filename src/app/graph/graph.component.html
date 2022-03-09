@@ -18,12 +18,18 @@
         </div>
         <div class="col" [hidden]="loaded==false">
             <div class="alert alert-warning alert-dismissible fade show" role="alert" [hidden]="alertHide==true">
-                <strong>WARNING</strong> Please be aware that this is application is not a psychological tool. If
-                you
-                feel you may hurt yourself or others, please seek professional care.
-                <button type="button" class="mr-0 btn close" (click)="alertHide=true">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <div class="row mt-0">
+                    <div class="col-11 mt-0">
+                        <strong>WARNING</strong> Please be aware that this is application is not a psychological tool.
+                        If
+                        you
+                        feel you may hurt yourself or others, please seek professional care.
+                        <strong>CONTACT SAMARITANS ON 116 123, OR AWARE ON 1800 80 48 48</strong>
+                    </div>
+                    <button type="button" class="mr-0 btn close col-1" (click)="alertHide=true">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
             <div class="card">
                 <div class="card-body">
@@ -37,12 +43,12 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <h2 class="mt-2" id="day">Daily Breakdown - Select a day to view details</h2>
                     <p>The graph below breaks down the emotions detected on your selected day.</p>
                     <div class="row" style="height: 600px">
                         <canvas class="h-10 card-body h-110" id="emotionChart"></canvas>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
