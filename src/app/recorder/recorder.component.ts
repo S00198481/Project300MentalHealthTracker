@@ -29,7 +29,7 @@ export class RecorderComponent implements OnInit {
   }
 
   handleActivities(buttonNumber: number) {
-    switch(buttonNumber) {
+    switch (buttonNumber) {
       case 1:
         this.activity.push("Running");
         console.log(this.activity)
@@ -43,7 +43,7 @@ export class RecorderComponent implements OnInit {
         console.log(this.activity)
         break;
       case 4:
-       this.activity.push("Cycling");
+        this.activity.push("Cycling");
         console.log(this.activity)
         break;
       case 5:
@@ -56,7 +56,7 @@ export class RecorderComponent implements OnInit {
         break;
     }
   }
-  
+
   checkData() {
     console.log(this.activityJSON)
   }
@@ -86,40 +86,39 @@ export class RecorderComponent implements OnInit {
       this.sentiment = JSON.stringify(this.sentiment)
       this.activityJSON = JSON.stringify(this.activity)
       this.AWSService.sendData(this.userText, this.emotion, this.sentiment, this.activityJSON);
-     }, 10000);
+    }, 10000);
   }
 
   processData() {
-    if (document.getElementById("text").textContent != null) {
-    this.userText = document.getElementById("text").textContent
-    this.userText = this.userText.split(" ").join("%20");
-    } 
-
     var textArea = document.getElementById("text2") as HTMLInputElement
+    if (document.getElementById("text").textContent != null) {
+      this.userText = document.getElementById("text").textContent
+      this.userText = this.userText.split(" ").join("%20");
+    }
 
-    if (textArea.value != null) {
-    this.userText = textArea.value
-    this.userText = this.userText.split(" ").join("%20");
+    if(textArea.textContent != null) {
+      this.userText = textArea.value
+      this.userText = this.userText.split(" ").join("%20");
     }
 
     console.log(this.userText)
-    
-  this.sentimentService.getEmotion(this.userText).subscribe(
-      emotion => {
-        this.emotion = emotion;
-      },
-      error => this.errorMessage = <any>error
-    );
 
-    this.sentimentService.getSentiment(this.userText).subscribe(
-      sentiment => {
-        this.sentiment = sentiment;
-      },
-      error => this.errorMessage = <any>error
-    );
-
-    this.emotion = JSON.stringify(this.emotion)
-    this.sentiment = JSON.stringify(this.sentiment)
+    this.sentimentService.getEmotion(this.userText).subscribe(
+        emotion => {
+          this.emotion = emotion;
+        },
+        error => this.errorMessage = <any>error
+      );
+  
+      this.sentimentService.getSentiment(this.userText).subscribe(
+        sentiment => {
+          this.sentiment = sentiment;
+        },
+        error => this.errorMessage = <any>error
+      );
+  
+      this.emotion = JSON.stringify(this.emotion)
+      this.sentiment = JSON.stringify(this.sentiment)
   }
 
 }
