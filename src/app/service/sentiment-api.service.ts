@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import credentials from 'credentials.json';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class SentimentApiService {
 
   getEmotion(text):Observable<JSON> {
     const headers = { 
-      "x-rapidapi-host": "twinword-emotion-analysis-v1.p.rapidapi.com",
-      "x-rapidapi-key": "706d446cd3mshcfee5d4d4f33f3bp1d59abjsnbba29a2cb4ac"}
+      "x-rapidapi-host": credentials.RAPID_API_HOST,
+      "x-rapidapi-key": credentials.RAPID_API_KEY}
     return this._http.get<JSON>(this._siteURL + text, {headers})
         .pipe(
           tap(data => console.log(data)
@@ -26,8 +27,8 @@ export class SentimentApiService {
 
   getSentiment(text):Observable<JSON> {
     const headers = { 
-      "x-rapidapi-host": "twinword-sentiment-analysis.p.rapidapi.com",
-      "x-rapidapi-key": "706d446cd3mshcfee5d4d4f33f3bp1d59abjsnbba29a2cb4ac"}
+      "x-rapidapi-host": credentials.RAPID_API_HOST,
+      "x-rapidapi-key": credentials.RAPID_API_KEY}
     return this._http.get<JSON>(this._siteURL + text, {headers})
         .pipe(
           tap(data => console.log(data)

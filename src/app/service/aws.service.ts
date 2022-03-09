@@ -7,6 +7,7 @@ import { CognitoIdentity } from 'node_modules/aws-sdk';
 import { Credentials } from 'node_modules/aws-sdk';
 import { v4 as uuidv4 } from 'node_modules/uuid';
 import moment from 'moment';
+import credentials from 'credentials.json'
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class AWSService {
 
   client = new DynamoDB({ region: "eu-west-1" });
   cognito = new CognitoIdentity
-  cred = new Credentials("AKIAWDJHI5VVRKEITGNG", "6sm+skj7bhPe3eTcdirE2YSgI0Gol8f4615EZ5QS");
+  cred = new Credentials(credentials.AWS_ACCESS_KEY, credentials.AWS_SECRET_KEY);
   data: any;
   key: any;
   params: any;
