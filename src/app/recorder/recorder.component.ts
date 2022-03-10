@@ -91,12 +91,12 @@ export class RecorderComponent implements OnInit {
 
   processData() {
     var textArea = document.getElementById("text2") as HTMLInputElement
-    if (document.getElementById("text").textContent != null) {
+    if (document.getElementById("text").textContent != "") {
       this.userText = document.getElementById("text").textContent
       this.userText = this.userText.split(" ").join("%20");
     }
 
-    if(textArea.textContent != null) {
+    if(textArea.value != "") {
       this.userText = textArea.value
       this.userText = this.userText.split(" ").join("%20");
     }

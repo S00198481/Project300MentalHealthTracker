@@ -15,7 +15,7 @@ export class SentimentApiService {
 
   getEmotion(text):Observable<JSON> {
     const headers = { 
-      "x-rapidapi-host": credentials.RAPID_API_HOST,
+      "x-rapidapi-host": credentials.RAPID_API_EMO_HOST,
       "x-rapidapi-key": credentials.RAPID_API_KEY}
     return this._http.get<JSON>(this._siteURL + text, {headers})
         .pipe(
@@ -27,7 +27,7 @@ export class SentimentApiService {
 
   getSentiment(text):Observable<JSON> {
     const headers = { 
-      "x-rapidapi-host": credentials.RAPID_API_HOST,
+      "x-rapidapi-host": credentials.RAPID_API_SENT_HOST,
       "x-rapidapi-key": credentials.RAPID_API_KEY}
     return this._http.get<JSON>(this._siteURL + text, {headers})
         .pipe(
@@ -38,7 +38,7 @@ export class SentimentApiService {
   }
 
   private handleError(err:HttpErrorResponse) {
-    console.log('MagicApiService: ' + err.message);
+    console.log('SentimentApiService: ' + err.message);
     return Observable.throw(err.message);
   }
 }
