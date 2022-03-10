@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EventEmitter } from 'stream';
 import { LoginComponent } from './login/login.component';
 
 @Component({
@@ -51,5 +52,12 @@ export class AppComponent {
       this.recorderShow = false;
       this.sentimentShow = true;
     }
+  }
+
+  logOut() {
+    this.doShow = false
+    this.loginShow = true;
+    this.recorderShow = false;
+    this.sentimentShow = false;
   }
 }
