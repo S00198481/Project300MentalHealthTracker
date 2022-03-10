@@ -89,7 +89,8 @@ export class GraphComponent implements OnInit {
           }]
         }
       })
-      document.getElementById('username').innerText = "Hello " + this.currentUser + ", here is your report";
+      document.getElementById('username').innerText = "Hello " +
+      this.currentUser.charAt(0).toUpperCase() + this.currentUser.substring(1, this.currentUser.indexOf('@')) + ", here is your report";
       this.loaded = true;
     }, 2500);
   }
