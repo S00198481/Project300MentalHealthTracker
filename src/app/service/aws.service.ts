@@ -22,11 +22,11 @@ export class AWSService {
   key: any;
   params: any;
   public users: any;
-  user:string;
-  public userLogs:any;
+  user: string;
+  public userLogs: any;
 
 
-  constructor() { 
+  constructor() {
     this.cognito.getCredentialsForIdentity
   }
 
@@ -65,8 +65,14 @@ export class AWSService {
     };
     console.log(this.params)
     this.client.putItem(this.params, function (err, data) {
-      if (err) console.log(err, err.stack); // an error occurred
-      else console.log(data)
+      if (err) {
+        console.log(err, err.stack); // an error occurred
+        window.alert("Upload Unsuccessful - Something went wrong")
+      }
+      else {
+        console.log(data)
+        window.alert("Upload Successful!")
+      }
     });
   }
 
@@ -74,7 +80,7 @@ export class AWSService {
     this.client.config.region = "eu-west-1"
     this.client.config.credentials = this.cred
     this.client.config.update({ region: "eu-west-1" })
-    
+
     setTimeout(() => {
       console.log(this.user)
       var params = {
@@ -96,11 +102,11 @@ export class AWSService {
           localStorage.setItem('logs', JSON.stringify(data, null, 2))
         }
       });
-    },2000)
-    
+    }, 2000)
+
   }
 
-  getUsers(username: string, password: string):boolean {
+  getUsers(username: string, password: string): boolean {
     this.client.config.region = "eu-west-1"
     this.client.config.credentials = this.cred
     this.client.config.update({ region: "eu-west-1" })
